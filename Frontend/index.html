@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <input type="text" placeholder="search product" id="inp">
+    <button onclick="search()">search</button>
+
+    <div id="parent">
+
+    </div>
+
+    
+</body>
+</html>
+<script>
+    async function viewAllPro(){
+
+      fetch('http://localhost:8888/product/findall')
+      .then((response) => response.json())
+      .then((data) => displayData(data));
+
+    }
+
+viewAllPro();
+
+function displayData(mensData){
+document.querySelector("#parent").innerHTML="";
+mensData.forEach(function(el){
+let div=document.createElement("div")
+let imag=document.createElement("img")
+imag.setAttribute("src",el.image)
+imag.setAttribute("class","image")
+
+let name=document.createElement("p")
+name.innerText=el.name;
+name.setAttribute("class","name")
+
+let price=document.createElement("p")
+price.innerText="₹"+el.price
+price.setAttribute("class","price")
+
+let unit=document.createElement("p")
+unit.innerText="₹"+el.unit
+unit.setAttribute("class","price")
+
+div.append(imag,name,price,unit)
+document.querySelector("#parent").append(div)
+})
+}
+
+async function search(){
+    let key=document.getElementById("inp").value;
+    if(key==""){
+        viewAllPro();
+    }else{
+        fetch(`http://localhost:8888/product/search/${key}`)
+        .then((response) => response.json())
+        .then((data) => displayData(data));
+    }
+}
+</script>
