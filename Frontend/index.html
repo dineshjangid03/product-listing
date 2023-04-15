@@ -19,6 +19,7 @@
 </body>
 </html>
 <script>
+    
     async function viewAllPro(){
 
       fetch('http://localhost:8888/product/findall')
@@ -30,29 +31,31 @@
 viewAllPro();
 
 function displayData(mensData){
-document.querySelector("#parent").innerHTML="";
-mensData.forEach(function(el){
-let div=document.createElement("div")
-let imag=document.createElement("img")
-imag.setAttribute("src",el.image)
-imag.setAttribute("class","image")
+    document.querySelector("#parent").innerHTML="";
+    mensData.forEach(function(el){
+        let div=document.createElement("div")
+        let imag=document.createElement("img")
+        imag.setAttribute("src",el.image)
+        imag.setAttribute("class","image")
 
-let name=document.createElement("p")
-name.innerText=el.name;
-name.setAttribute("class","name")
+        let name=document.createElement("p")
+        name.innerText=el.name;
+        name.setAttribute("class","name")
 
-let price=document.createElement("p")
-price.innerText="₹"+el.price
-price.setAttribute("class","price")
+        let price=document.createElement("p")
+        price.innerText="₹"+el.price
+        price.setAttribute("class","price")
 
-let unit=document.createElement("p")
-unit.innerText="₹"+el.unit
-unit.setAttribute("class","price")
+        let unit=document.createElement("p")
+        unit.innerText="₹"+el.unit
+        unit.setAttribute("class","price")
 
-div.append(imag,name,price,unit)
-document.querySelector("#parent").append(div)
-})
+
+        div.append(imag,name,price,unit)
+        document.querySelector("#parent").append(div)
+    })
 }
+
 
 async function search(){
     let key=document.getElementById("inp").value;
